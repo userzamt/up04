@@ -1,0 +1,125 @@
+# День 03. PowerShell. Создание пользователей
+
+## `Microsoft.PowerShell.LocalAccounts`
+Для управления локальными пользователями и группами в Windows существует встроенный  модуль Microsoft.PowerShell.LocalAccounts. С его помощью можно создавать или удалять локального пользователя, создавать новую группу и добавить в нее пользователей. 
+
+```powershell
+Get-Command -Module Microsoft.PowerShell.LocalAccounts
+
+Get-Module -ListAvailable | where Name -Like "*LocalAccount*"
+```
+
+[Документация по Microsoft.PowerShell.LocalAccounts](https://learn.microsoft.com/ru-ru/powershell/module/microsoft.powershell.localaccounts/?view=powershell-5.1)
+
+Коммандлеты в составе модуля Microsoft.PowerShell.LocalAccounts:
++ **Add-LocalGroupMember** – добавить пользователя в локальную группу
++ **Disable-LocalUser** – отключить локальную учетную запись
++ **Enable-LocalUser** – включить учетную запись
++ **Get-LocalGroup** – получить информацию о локальной группе
++ **Get-LocalGroupMember** – вывести список пользователей в локальной группе
++ **Get-LocalUser** – получить информацию о локальном пользователе
++ **New-LocalGroup** – создать новую локальную группы
++ **New-LocalUser** – создать нового пользователя
++ **Remove-LocalGroup** – удалить группу
++ **Remove-LocalGroupMember** – удалить члена из группы
++ **Remove-LocalUser** – удалить пользователя
++ **Rename-LocalGroup** – переименовать группу
++ **Rename-LocalUser** – переименовать пользователя
++ **Set-LocalGroup** – изменить группу
++ **Set-LocalUser** – изменить пользователя
+
+
+### Создание пользователя(локального)
+```powershell
+New-LocalUser -Name ivanov -FullName "Ivanov Ivan Ivanovich" -AccountNeverExpires -PasswordNeverExpires
+```
+
+При таком создании пользователя пароль для него необходимо будет ввести в консоли сразу же после того как Вы нажмёте *Enter*
+
+Вторая команда создает локальную учетную запись пользователя и задает пароль новой учетной записи для безопасной строки, сохраненной в `$Secure_String_Pwd`. 
+
+```powershell
+$Secure_String_Pwd = ConvertTo-SecureString "P@ssW0rD!" -AsPlainText -Force
+
+New-LocalUser -Name ivanov -FullName "Ivanov Ivan Ivanovich" -AccountNeverExpires -PasswordNeverExpires -Password $Secure_String_Pwd
+```
+>[!NOTE]
+> Преобразование обычной текстовой строки в защищенную строку. Эта команда преобразует строку обычного текста *P@ssW0rD!* в безопасную строку и сохраняет результат в переменной `$Secure_String_Pwd`. Чтобы использовать параметр `-AsPlainText`, команда также должна содержать параметр `-Force`.
+
+
+### Добавление в группу
+```powershell
+Add-LocalGroupMember -Group Администраторы -Member ivanov
+```
+
+
+### Изменение
+Изменение существующих объектов делается с помощью команд с глаголом *Set*. 
+
+```powershell
+$password = ConvertTo-SecureString -String "Parol12!" -AsPlainText -Force
+Set-LocalUser -Name ivanov -Password $password
+```
+
+Вы можем изменить все те же параметры, что и в случае создания учетной записи (перечислены выше). Например отключить срок действия пароля:
+
+```powershell
+Set-LocalUser -Name user -PasswordNeverExpires
+```
+
+
+## Модуль ActiveDirectory
+[Документация по модулю ActiveDirectory](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
+
+```powershell
+ Get-Module -ListAvailable | Where-Object Name -like "*Active*"
+
+ Get-Command -Module ActiveDirectory
+```
+
+## Создание доменной учетной записи
+Обычно необходимо создать учетную запись *AD* с паролем, именем и фамилией и она должна быть активна. 
+
+```powershell
+$pass = ConvertTo-SecureString -String "Root-123" -AsPlainText -Force
+
+New-ADUser -Name petrov -GivenName "Пётр" -Surname "Петров" -AccountPassword $pass -Enabled $true
+```
+
+
+## Практическое задание
+>[!CAUTION]
+> Все проделанные Вами действия должны быть отражены в отчёте в виде скриншотов
+
+1. Создать две виртуальные машины. На одну установить Windows Server 2012R2. На другую виртуальную машину установить Windows 10. Для каждой машины создать снимок состояния.
+
+2. В Windows Server 2012R2 поднять роль Active Directory. В качестве имени домена указать Вашу фамилию на английском. Сделать снимок состояния виртуальной машины. Например:
+```
+ivanov.local
+```
+
+3. Создать доменную учетную запись с Вашим ФИО. Логин *admin*. Добавить в группу *Администраторы домена*.
+
+4. Виртуальную машину с Windows 10 ввести в созданный домен. Войти под доменной учетной записью *admin*. Сделать снимок состояния виртуальной машины.
+
+5. Получить список локальных пользователей и групп в Windows 10. 
+
+6. Основываясь на данные из файла *User.csv*, создать локальных пользователей в Windows 10 чья фамилия начинается на *Б* и *В*. Добавить пользователей по фамилии на *Б* в группу **Пользователи**. Фамилии на *В* в группу **Администраторы**. Данное задание допускается оформить в виде скрипта *ps1* или в виде конвейера. Вывести учетные записи входящие в обе группы.
+
+7. Отключить по одной учетной записи из групп **Пользователи** и **Администраторы**. Вывести учетные записи входящие в обе группы.
+
+8. Сменить пароль у любого локального пользователя.
+
+9. Организовать возможность запуска интерактивного сеанса в PowerShell между виртуальными машинами. Подключиться из виртуальной машины с Windows 10 к Windows Server 2012R2 используя PowerShell. 
+
+>[!NOTE]
+> Лекция [Удаленный запуск сценариев](https://github.com/userzamt/mdk0401.github.io/blob/main/PowerShell/Lesson23/lesson23.md)
+
+>[!WARNING]
+> Все последующие задания выполняются на Windows 10 с запушенным интерактивном сеансом взаимодействия с Windows Server 2012R2 в PowerShell
+
+10. Основываясь на данные из файла *User.csv*, создать доменные учетные записи. Данное задание допускается оформить в виде скрипта *ps1* или в виде конвейера. Добавлять пользователей в группы и создавать новые группы **НЕ НАДО**
+
+11. Используя командлет `Get-ADUser` вывести информация об учетных записях в домене.
+
+
