@@ -9,6 +9,8 @@ Get-Command -Module Microsoft.PowerShell.LocalAccounts
 Get-Module -ListAvailable | where Name -Like "*LocalAccount*"
 ```
 
+[Документация по Microsoft.PowerShell.LocalAccounts](https://learn.microsoft.com/ru-ru/powershell/module/microsoft.powershell.localaccounts/?view=powershell-5.1)
+
 Коммандлеты в составе модуля Microsoft.PowerShell.LocalAccounts:
 + **Add-LocalGroupMember** – добавить пользователя в локальную группу
 + **Disable-LocalUser** – отключить локальную учетную запись
@@ -27,6 +29,24 @@ Get-Module -ListAvailable | where Name -Like "*LocalAccount*"
 + **Set-LocalUser** – изменить пользователя
 
 
+### Создание пользователя(локального)
+```powershell
+New-LocalUser -Name ivanov -FullName "Ivanov Ivan Ivanovich" -AccountNeverExpires -PasswordNeverExpires
+```
+
+При таком создании пользователя пароль для него необходимо будет ввести в консоли сразу же после того как Вы нажмёте *Enter*
+
+Вторая команда создает локальную учетную запись пользователя и задает пароль новой учетной записи для безопасной строки, сохраненной в `$Secure_String_Pwd`. 
+
+```powershell
+$Secure_String_Pwd = ConvertTo-SecureString "P@ssW0rD!" -AsPlainText -Force
+
+New-LocalUser -Name ivanov -FullName "Ivanov Ivan Ivanovich" -AccountNeverExpires -PasswordNeverExpires -Password $Secure_String_Pwd
+```
+>[!NOTE]
+> Преобразование обычной текстовой строки в защищенную строку. Эта команда преобразует строку обычного текста *P@ssW0rD!* в безопасную строку и сохраняет результат в переменной `$Secure_String_Pwd`. Чтобы использовать параметр `-AsPlainText`, команда также должна содержать параметр `-Force`.
+
+
 ## Практическое задание
 >[!CAUTION]
 > Все проделанные Вами действия должны быть отражены в отчёте в виде скриншотов
@@ -41,3 +61,6 @@ ivanov.local
 1. Создать доменную учетную запись с Вашим ФИО. Логин *admin*. Добавить в группу *Администраторы домена*.
 
 1. Виртуальную машину с Windows 10 ввести в созданный домен. Войти под доменной учетной записью *admin*. Сделать снимок состояния виртуальной машины.
+
+1. Получить список локальных пользователей и групп в Windows 10.
+
