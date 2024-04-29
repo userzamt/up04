@@ -68,6 +68,16 @@ Set-LocalUser -Name user -PasswordNeverExpires
 ```
 
 
+## Модуль ActiveDirectory
+[Документация по модулю ActiveDirectory](https://learn.microsoft.com/en-us/powershell/module/activedirectory/?view=windowsserver2022-ps)
+
+```powershell
+ Get-Module -ListAvailable | Where-Object Name -like "*Active*"
+
+ Get-Command -Module ActiveDirectory
+```
+
+
 ## Практическое задание
 >[!CAUTION]
 > Все проделанные Вами действия должны быть отражены в отчёте в виде скриншотов
@@ -93,8 +103,10 @@ ivanov.local
 
 9. Организовать возможность запуска интерактивного сеанса в PowerShell между виртуальными машинами. Подключиться из виртуальной машины с Windows 10 к Windows Server 2012R2 используя PowerShell. 
 
->[!WARNING]
+>[!NOTE]
 > Лекция [Удаленный запуск сценариев](https://github.com/userzamt/mdk0401.github.io/blob/main/PowerShell/Lesson23/lesson23.md)
 
+>[!WARNING]
+> Все последующие задания выполняются на Windows 10 с запушенным интерактивном сеансом взаимодействия с Windows Server 2012R2 в PowerShell
 
 
