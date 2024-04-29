@@ -91,6 +91,10 @@ ivanov.local
 
 8. Сменить пароль у любого локального пользователя.
 
+9. Организовать возможность запуска интерактивного сеанса в PowerShell между виртуальными машинами. Подключиться из виртуальной машины с Windows 10 к Windows Server 2012R2 используя PowerShell. 
+
+>[!WARNING]
+> Лекция [Удаленный запуск сценариев](https://github.com/userzamt/mdk0401.github.io/blob/main/PowerShell/Lesson23/lesson23.md)
 
 
 
