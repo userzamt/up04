@@ -77,6 +77,15 @@ Set-LocalUser -Name user -PasswordNeverExpires
  Get-Command -Module ActiveDirectory
 ```
 
+## Создание доменной учетной записи
+Обычно необходимо создать учетную запись *AD* с паролем, именем и фамилией и она должна быть активна. 
+
+```powershell
+$pass = ConvertTo-SecureString -String "Root-123" -AsPlainText -Force
+
+New-ADUser -Name petrov -GivenName "Пётр" -Surname "Петров" -AccountPassword $pass -Enabled $true
+```
+
 
 ## Практическое задание
 >[!CAUTION]
@@ -108,5 +117,9 @@ ivanov.local
 
 >[!WARNING]
 > Все последующие задания выполняются на Windows 10 с запушенным интерактивном сеансом взаимодействия с Windows Server 2012R2 в PowerShell
+
+10. Основываясь на данные из файла *User.csv*, создать доменные учетные записи. Данное задание допускается оформить в виде скрипта *ps1* или в виде конвейера.
+
+11. Используя командлет `Get-ADUser` вывести информация об учетных записях в домене.
 
 
