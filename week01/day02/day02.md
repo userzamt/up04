@@ -122,4 +122,4 @@ adduser \
 >[!WARNING]
 > Последующее задание выполнить с использованием утилиты **TightVNC**
 
-16. Используя утилиту [system-config-users](https://redos.red-soft.ru/base/manual/administration-users/ro73-system-config-users/) создать пользователя с Вашей ФИО. Логин допускается указать на Ваше усмотрение. Войти в систему под созданной учетной записью. Вывести информацию о пользователи.
+18. Используя утилиту [system-config-users](https://redos.red-soft.ru/base/manual/administration-users/ro73-system-config-users/) создать пользователя с Вашей ФИО. Логин допускается указать на Ваше усмотрение. Войти в систему под созданной учетной записью. Вывести информацию о пользователи.
