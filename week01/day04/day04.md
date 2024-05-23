@@ -79,7 +79,7 @@ crontab -l
 >[!NOTE]
 >[Планировщик задач в РЕД ОС. Cron](https://rutube.ru/video/f85b5dd4e1e1c0a8aa81de8f65727be8/?ysclid=lwis6acoyk286369469)
 
-1. Установить на РЕД ОС систему для хостинга Git репозиториев **Gitea**.
+6. Установить на РЕД ОС систему для хостинга Git репозиториев **Gitea**.
 
 >[!NOTE]
 >[Отключение SELINUX](https://redos.red-soft.ru/base/arm/arm-other/disable-selinux/?ysclid=lwirom1xhj256263963)
