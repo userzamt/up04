@@ -55,15 +55,17 @@ id
 
 ### useradd
 ```bash
-groupadd --system git
+groupadd clietns
+
 adduser \
-   --system \
    --shell /bin/bash \
-   --comment 'Git Version Control' \
-   --gid git \
-   --home-dir /home/git \
+   --comment 'Alexander Duggan' \
+   --gid clietns \
+   --home-dir /home/duggan \
    --create-home \
-   git
+   client1
+
+passwd client1
 ```
 
 
