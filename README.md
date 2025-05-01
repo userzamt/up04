@@ -7,4 +7,4 @@
 
 [День 03. PowerShell. Создание пользователей](week01/day03/day03.md)
 
-[День 04. PowerShell. SSH. CRON. ВВод в домен. Gitea](week01/day04/day04.md)
+[День 04. PowerShell. SSH. CRON. Ввод в домен](week01/day04/day04.md)
