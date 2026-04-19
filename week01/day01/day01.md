@@ -233,7 +233,7 @@ systemctl опции команда служба
 
 
 ### RPM Package Manager
-1. Установить *Visua lStudio Code* в РЕД ОС. Отображать подробную информацию о ходе установки, а так же показать статус-бар. Создать кнопку запуска на рабочем столе для *Visual Studio Code*
+1. Установить *Visua Studio Code* в РЕД ОС. Отображать подробную информацию о ходе установки, а так же показать статус-бар. Создать кнопку запуска на рабочем столе для *Visual Studio Code*
 
 [Visual Studio Code](https://code.visualstudio.com/download)
 
